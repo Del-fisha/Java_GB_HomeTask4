@@ -90,7 +90,7 @@ public class Main {
         return sc.nextLine();
     }
 
-    //Метод отображения сокращённого ФИО
+    // Метод отображения сокращённого ФИО
     public static void abbreviated(ArrayList<ArrayList<String>> smth){
         for (ArrayList<String> value:smth) {
              print(value.get(1) + " "
