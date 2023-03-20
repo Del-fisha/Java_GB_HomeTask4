@@ -1,7 +1,5 @@
 package org.example;
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 
 public class Main {
@@ -15,6 +13,7 @@ public class Main {
             print("Для выхода из программы нажмите \"q\"");
             print("Для отображения развёрнутого списка нажмите \"p\"");
             print("Для отображения сокращённого списка нажмите \"a\"");
+            print("Для отображения отсортированного (по возрасту и полу) списка нажмите \"s\"");
             while (true) {
                 String input = write();
                 if (input.equalsIgnoreCase("Q")) {
@@ -26,18 +25,29 @@ public class Main {
                     print("Для выхода из программы нажмите \"q\"");
                     print("Для отображения развёрнутого списка нажмите \"p\"");
                     print("Для отображения сокращённого списка нажмите \"a\"");
+                    print("Для отображения отсортированного (по возрасту и полу) списка нажмите \"s\"");
                 }
                 if(input.equalsIgnoreCase("p")) {
                     print(dataBase);
                     print("Для добавления новых людей в базу нажмите \"n\"");
                     print("Для выхода из программы нажмите \"q\"");
                     print("Для отображения сокращённого списка нажмите \"a\"");
+                    print("Для отображения отсортированного (по возрасту и полу) списка нажмите \"s\"");
                 }
                 if(input.equalsIgnoreCase("a")){
                     abbreviated(dataBase);
                     print("Для добавления новых людей в базу нажмите \"n\"");
                     print("Для выхода из программы нажмите \"q\"");
                     print("Для отображения развёрнутого списка нажмите \"p\"");
+                    print("Для отображения отсортированного (по возрасту и полу) списка нажмите \"s\"");
+                }
+                if(input.equalsIgnoreCase("s")) {
+                    sortArray(dataBase);
+                    print(dataBase);
+                    print("Для добавления новых людей в базу нажмите \"n\"");
+                    print("Для выхода из программы нажмите \"q\"");
+                    print("Для отображения развёрнутого списка нажмите \"p\"");
+                    print("Для отображения сокращённого списка нажмите \"a\"");
                 }
                 }
             }
@@ -99,5 +109,23 @@ public class Main {
                      + value.get(4) + " "
                      + value.get(5));
         }
+    }
+
+    // Метод сортировки
+    public static void sortArray(ArrayList<ArrayList<String>> list){
+        Collections.sort(list, new Comparator<ArrayList<String>>() {
+            @Override
+            public int compare(ArrayList<String> o1, ArrayList<String> o2) {
+                int age1 = Integer.parseInt(o1.get(5));
+                int age2 = Integer.parseInt(o2.get(5));
+                int cmp = Integer.compare(age1, age2);
+                if(cmp == 0){
+                    String gender1 = o1.get(4);
+                    String gender2 = o2.get(4);
+                    cmp = gender1.compareTo(gender2);
+                }
+                return cmp;
+            }
+        });
     }
 }
